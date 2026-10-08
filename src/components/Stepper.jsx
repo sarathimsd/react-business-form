@@ -2,12 +2,7 @@ import { Check, Circle } from "lucide-react";
 
 const steps = [
   "Create account",
-  "Buisness Overview",
-  "Build Profile",
-  "Bank Detais",
-  "Tax Information",
-  "Two-factor Authentication",
-  "Confirm details",
+  "Confirm details"
 ]; 
 
 function Stepper({ currentStep = 2 }) {

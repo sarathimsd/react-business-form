@@ -130,6 +130,13 @@ const handleSubmit = () => {
                 />
               </FormField>
 
+              {/* Country and State */}
+              <FormField
+                label="Country and State"
+                description="Select your country and state"
+              >
+               </FormField>
+
               {/* Billing Address */}
               <FormField
                 label="Billing address"
