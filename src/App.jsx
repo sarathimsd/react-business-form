@@ -1,19 +1,28 @@
 import { useState } from "react";
 import { ArrowRight } from "lucide-react";
+import { Routes, Route, useNavigate } from "react-router-dom";
+
 import Header from "./components/Header";
 import Stepper from "./components/Stepper";
 import FormField from "./components/FormField";
 import CompanyType from "./components/CompanyType";
 import EmployeeSize from "./components/EmployeeSize";
 import BusinessAddress from "./components/BusinessAddress";
+import NextPage from "./components/NextPage";
+import VerifySuccess from "./components/VerifySuccess";
 
-function App() {
+function FormPage() {
+  const navigate = useNavigate();
+
   const [businessTitle, setBusinessTitle] = useState("");
   const [description, setDescription] = useState("");
+
   const [companyType, setCompanyType] = useState(
     "LLC / Partnership / Single-member"
   );
+
   const [employeeSize, setEmployeeSize] = useState("1-20");
+
   const [address, setAddress] = useState({
     country: "",
     line1: "",
@@ -22,38 +31,31 @@ function App() {
     state: "",
     zipcode: "",
   });
+
   const [sameAddress, setSameAddress] = useState(true);
-  const [currentStep, setCurrentStep] = useState(2);
-  const [submitted, setSubmitted] = useState(false);
-  const [showConfirm, setShowConfirm] = useState(false);
-      // Continue =============== //
+  const [currentStep] = useState(2);
+
   const handleContinue = () => {
-  setShowConfirm(true);
-};
-
-const handleBack = () => {
-  setShowConfirm(false);
-};
-
-const handleSubmit = () => {
-  setSubmitted(true);
-};
-
-
+    navigate("/next");
+  };
 
   return (
     <div className="min-h-screen bg-[#f8fafc]">
+
       {/* HEADER */}
       <Header />
 
       {/* MAIN CONTAINER */}
       <main className="mx-auto flex w-full max-w-[1240px] flex-col px-4 pb-12 pt-6 sm:px-8 sm:pt-8 lg:flex-row lg:gap-14 lg:px-12 lg:pt-14">
+
         {/* STEPPER */}
         <Stepper currentStep={currentStep} />
 
         {/* FORM SECTION */}
         <section className="min-w-0 w-full flex-1">
+
           <div className="mx-auto w-full max-w-[420px] sm:max-w-[620px] lg:mx-0 lg:max-w-[680px]">
+
             {/* TITLE */}
             <h1 className="mb-6 text-xl font-semibold tracking-tight text-[#303c4a] sm:mb-8 sm:text-2xl">
               About your business
@@ -61,6 +63,7 @@ const handleSubmit = () => {
 
             {/* FORM FIELDS */}
             <div className="space-y-4 sm:space-y-5 lg:space-y-6">
+
               {/* Business Title */}
               <FormField label="Your business title">
                 <input
@@ -135,7 +138,7 @@ const handleSubmit = () => {
                 label="Country and State"
                 description="Select your country and state"
               >
-               </FormField>
+              </FormField>
 
               {/* Billing Address */}
               <FormField
@@ -143,20 +146,26 @@ const handleSubmit = () => {
                 description="Helpful description"
               >
                 <label className="flex cursor-pointer items-center gap-2 text-xs font-medium text-gray-700 sm:text-sm">
+
                   <input
                     type="checkbox"
                     checked={sameAddress}
                     onChange={(e) => setSameAddress(e.target.checked)}
                     className="h-4 w-4 cursor-pointer accent-blue-500"
                   />
+
                   <span>Same as business address</span>
+
                 </label>
               </FormField>
+
             </div>
 
             {/* BUTTONS */}
             <div className="mt-8 border-t border-gray-200/80 pt-6 sm:mt-10 sm:pt-7">
+
               <div className="flex justify-center">
+
                 <button
                   type="button"
                   onClick={handleContinue}
@@ -165,12 +174,34 @@ const handleSubmit = () => {
                   Continue
                   <ArrowRight size={18} />
                 </button>
+
               </div>
+
             </div>
+
           </div>
+
         </section>
+
       </main>
     </div>
+  );
+}
+
+function App() {
+  return (
+    <Routes>
+
+      {/* PAGE 1 */}
+      <Route path="/" element={<FormPage />} />
+
+      {/* PAGE 2 */}
+      <Route path="/next" element={<NextPage />} />
+
+      {/* PAGE 3 */}
+      <Route path="/success" element={<VerifySuccess />} />
+
+    </Routes>
   );
 }
 

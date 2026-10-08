@@ -1,1 +1,16 @@
 @import "tailwindcss";
+
+.button-gap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+@media (min-width: 550px) {
+  .button-gap {
+    flex-direction: row;
+    justify-content: center;
+    gap: 40px;
+  }
+}

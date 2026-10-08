@@ -2,7 +2,8 @@ import { Check, Circle } from "lucide-react";
 
 const steps = [
   "Create account",
-  "Confirm details"
+  "Confirm details",
+  "Verify Successful"
 ]; 
 
 function Stepper({ currentStep = 2 }) {
